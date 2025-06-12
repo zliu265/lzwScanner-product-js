@@ -37,4 +37,18 @@ function calculateMA(data, period, priceKey = 'close') {
   return result;
 }
 
+/**
+ * Calculate average volume over a period.
+ * This is a thin wrapper over `calculateMA` with `volume` as the default key.
+ * @param {Array<Object>} data - Array of price objects sorted by date ascending.
+ * @param {number} period - Number of periods for the average volume.
+ * @param {string} [volumeKey='volume'] - Key to use for volume in each object.
+ * @returns {Array<number|undefined>} Average volume values for each data point.
+ */
+function calculateAverageVolume(data, period, volumeKey = 'volume') {
+  return calculateMA(data, period, volumeKey);
+}
+
 module.exports = calculateMA;
+module.exports.calculateMA = calculateMA;
+module.exports.calculateAverageVolume = calculateAverageVolume;

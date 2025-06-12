@@ -4,12 +4,15 @@ This repository contains helper utilities for stock scanning.
 
 ## Moving Average
 
-`ma.js` exports a `calculateMA` function which computes a simple moving average for an array of price data.
+`ma.js` exports helper functions for working with stock data.
+
+* `calculateMA(data, period, [priceKey])` – compute a simple moving average for any numeric field (defaults to `close`).
+* `calculateAverageVolume(data, period, [volumeKey])` – compute a moving average of volume (defaults to the `volume` field).
 
 Example usage:
 
 ```javascript
-const calculateMA = require('./ma');
+const { calculateMA, calculateAverageVolume } = require('./ma');
 
 const data = [
   { close: 10 },
@@ -20,6 +23,14 @@ const data = [
 
 const ma = calculateMA(data, 3);
 console.log(ma); // [undefined, undefined, 11, 12]
+
+const volMA = calculateAverageVolume([
+  { volume: 100 },
+  { volume: 110 },
+  { volume: 90 },
+  { volume: 120 }
+], 3);
+console.log(volMA); // [undefined, undefined, 100, 106.66666666666667]
 ```
 
 Data should be sorted by date in ascending order before calling the function.
