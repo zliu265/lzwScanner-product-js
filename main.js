@@ -3,6 +3,7 @@
 const fs = require('fs');
 
 const movingAverage = require('./src/indicators/movingAverage');
+const averageVolume = require('./src/indicators/averageVolume');
 
 // 读取并解析 JSON 文件
 const json = JSON.parse(fs.readFileSync('AAPL.json', 'utf-8'));
@@ -15,7 +16,9 @@ console.log('First close:', firstClose);
 const ma5 = movingAverage(json.data, 5);
 const ma50 = movingAverage(json.data, 50);
 const ma150 = movingAverage(json.data, 150);
+const av5 = averageVolume(json.data, 5);
 
 console.log('MA5:', ma5);
 console.log('MA50:', ma50);
 console.log('MA150:', ma150);
+console.log('AV5:', av5);
