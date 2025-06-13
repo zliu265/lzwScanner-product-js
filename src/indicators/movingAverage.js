@@ -6,7 +6,8 @@ function movingAverage(data, period) {
   for (let i = data.length - period; i < data.length; i++) {
     sum += data[i].close;
   }
-  return sum / period;
+  const avg = sum / period;
+  return parseFloat(avg.toFixed(2));
 }
 
 module.exports = movingAverage;
