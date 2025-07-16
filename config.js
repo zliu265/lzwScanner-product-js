@@ -1,6 +1,7 @@
 module.exports = {
-  period: 1440,
-  symbolsFile: 'symbols.txt',
+  // period: 1440,
+  // symbolsFile: 'symbols.txt',
+  dataFile: 'src/from_Excel_Data/sheets_export.json',
   stageOne: {
     minPrice: 12,
     minAvgVolume: 250000,

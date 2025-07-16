@@ -7,12 +7,20 @@ const stageTwoVCP = require('./src/stages/stageTwoVCP');
 const stageThreeBreakout = require('./src/stages/stageThreeBreakout');
 const { saveResults } = require('./src/utils/fileHelper');
 
-async function loadSymbols(file) {
-  const text = await fs.readFile(file, 'utf-8');
-  return text
-    .split(/\r?\n/)
-    .map(s => s.trim())
-    .filter(Boolean);
+//此为调用api接口专用
+// async function loadSymbols(file) {
+//   const text = await fs.readFile(file, 'utf-8');
+//   return text
+//     .split(/\r?\n/)
+//     .map(s => s.trim())
+//     .filter(Boolean);
+// }
+
+//此为调用Excel数据专用
+async function loadSymbols() {
+  const text = await fs.readFile(config.dataFile, 'utf-8');
+  const json = JSON.parse(text);
+  return Object.keys(json)
 }
 
 async function processSymbol(symbol) {
@@ -35,7 +43,9 @@ async function processSymbol(symbol) {
 }
 
 async function main() {
-  const symbols = await loadSymbols(config.symbolsFile);
+  // const symbols = await loadSymbols(config.symbolsFile);
+  const symbols = await loadSymbols();
+  
   const results = [];
   for (const sym of symbols) {
     try {
